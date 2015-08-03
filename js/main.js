@@ -14,16 +14,14 @@
 $(document).ready(function() {
   console.log('sanity check');
   var target = event.target;
-  var numArr = [];
   // var secondValArr = [];
-  var operatorArr = [];
 
 
 
 // --------------------------------------------------
 
   var operatorButtons = $('.operator').not('#cancel').not('#calc');
-
+  var operatorArr = [];
 
   operatorButtons.on('click', function() {
 
@@ -33,6 +31,10 @@ $(document).ready(function() {
     // can only select on operator at a time
     operatorArr = [];
     operatorArr.push($(this).text());
+
+    numArr.push(operatorArr);
+
+    $('#screen').append(operatorArr);
     console.log(operatorArr);
 
   });
@@ -40,22 +42,28 @@ $(document).ready(function() {
 //--------------------------------------------------
 // selecting number buttons
   var numButtons = $('span').not('.operator');
+  var numArr = [];
+  // var currentVal = [];
+
   // console.log(numButtons.text());
   numButtons.on('click', function() {
+    var currentVal = [];
+    currentVal.push($(this).text());
+    console.log(currentVal);
 
     // console.log('numbers!');
     // console.log($(this).text());
 
-    // clears array
-    numArr = [];
-    // selects number
-    numArr.push($(this).text());
-    // appends number to screen
-    $('#screen').append(numArr);
-    // firstVal = [];
-    // firstVal = numArr.join('');
-    // console.log(firstVal);
-    // $('#screen').append(firstVal);
+    // pushes numbers to array
+    // currentVal.push($(this).text());
+    // console.log(currentVal);
+
+    // making an array of arrays
+    numArr.push(currentVal);
+    console.log(numArr);
+    // appends numbers to screen
+    $('#screen').append($(this).text());
+
 
 
     // // sets first value if operand is not selected
@@ -69,6 +77,40 @@ $(document).ready(function() {
     //   console.log(secondValArr);
     // }
 
+  });
+
+  $('#calc').on('click', function() {
+
+    $('#screen').empty();
+
+    switch (numArr[1]) {
+      case '+':
+        var sum = numArr[0] + numArr[2];
+        $('#screen').append(sum);
+        break;
+      case '-':
+        var subtract = numArr[0] - numArr[2];
+        $('#screen').append(subtract);
+        break;
+      case '*':
+        var multiply = numArr[0] * numArr[2];
+        $('#screen').append(multiply);
+        break;
+      case '\u00F7':
+        var divide = numArr[0] / numArr[2];
+        $('#screen').append(divide);
+        break;
+    }
+    numArr = [];
+
+  });
+
+  $('#cancel').on('click', function() {
+
+    // clears screen
+    $('#screen').empty();
+    // emptys array
+    numArr = [];
   });
 
 
