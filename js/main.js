@@ -15,14 +15,14 @@ $(document).ready(function() {
   console.log('sanity check');
   var target = event.target;
   // var secondValArr = [];
-
+  var firstVal = '';
+  var secondVal = '';
+  var operatorButtons = $('.operator').not('#cancel').not('#calc');
+  var currentVal = 0;
+  var operatorArr = [];
 
 
 // --------------------------------------------------
-
-  var operatorButtons = $('.operator').not('#cancel').not('#calc');
-  var operatorArr = [];
-
   operatorButtons.on('click', function() {
 
     // console.log('operators!');
@@ -30,132 +30,91 @@ $(document).ready(function() {
     // pushes operators to array
     // can only select on operator at a time
     operatorArr = [];
+    currentVal = 1;
     operatorArr.push($(this).text());
-
-    numArr.push(operatorArr);
 
     $('#screen').append(operatorArr);
     console.log(operatorArr);
+
 
   });
 
 //--------------------------------------------------
 // selecting number buttons
   var numButtons = $('span').not('.operator');
-  var numArr = [];
   // var currentVal = [];
 
-  // console.log(numButtons.text());
   numButtons.on('click', function() {
-    var currentVal = [];
-    currentVal.push($(this).text());
-    console.log(currentVal);
 
-    // console.log('numbers!');
-    // console.log($(this).text());
+    // if no operator is selected
+    if (currentVal === 0) {
+    firstVal += ($(this).text());
+    console.log(firstVal);
+  }
+    // once operator is selected
+    else {
+      secondVal += ($(this).text());
+      console.log(secondVal);
+    }
 
-    // pushes numbers to array
-    // currentVal.push($(this).text());
-    // console.log(currentVal);
-
-    // making an array of arrays
-    numArr.push(currentVal);
-    console.log(numArr);
     // appends numbers to screen
     $('#screen').append($(this).text());
-
-
-
-    // // sets first value if operand is not selected
-    // if (/*--- operator array is empty ---*/) {
-    //   firstValArr.push($(this).text());
-    //   console.log(firstValArr);
-    // }
-    // // sets second value if operand is selected
-    // else if (/*--- operator array is not empty ---*/) {
-    //   secondValArr.push($(this).text());
-    //   console.log(secondValArr);
-    // }
 
   });
 
   $('#calc').on('click', function() {
 
+    // var numArr = [];
+    // numArr.push($('#screen').text());
+    // // console.log($('#screen').text().split());
+    // $('#screen').empty();
+    // console.log(numArr);
+
+    // firstVal.join('');
+    // secondVal.join('');
+    // console.log(firstVal.join(''));
+    // console.log(secondVal.join(''));
+
     $('#screen').empty();
 
-    switch (numArr[1]) {
+    switch (operatorArr[0]) {
       case '+':
-        var sum = numArr[0] + numArr[2];
+      // debugger;
+        var sum = parseInt(firstVal) + parseInt(secondVal);
         $('#screen').append(sum);
         break;
       case '-':
-        var subtract = numArr[0] - numArr[2];
+      // debugger;
+        var subtract = parseInt(firstVal) - parseInt(secondVal);
         $('#screen').append(subtract);
         break;
-      case '*':
-        var multiply = numArr[0] * numArr[2];
+      case 'x':
+      // debugger;
+        var multiply = parseInt(firstVal) * parseInt(secondVal);
         $('#screen').append(multiply);
         break;
       case '\u00F7':
-        var divide = numArr[0] / numArr[2];
+      // debugger;
+        var divide = parseInt(firstVal) / parseInt(secondVal);
         $('#screen').append(divide);
         break;
     }
-    numArr = [];
+    firstVal = $('#screen').text();
+    secondVal = '';
 
   });
-
+  // this works
   $('#cancel').on('click', function() {
 
     // clears screen
     $('#screen').empty();
     // emptys array
-    numArr = [];
+    firstVal = '';
+    secondVal = '';
+    operatorArr = [];
+    currentVal = 0;
   });
 
 
 });
 // end jquery
-
-
-// var operators;
-// var operatorArr = [];
-
-// //-----------------------------------------
-// // sum function
-// function addition(num1, num2) {
-//   var total = 0;
-//   total = num1 + num2;
-//   return total;
-// }
-// // ----------------------------------------
-// // subtraction function
-// function subtraction(num1, num2) {
-//   var total = 0;
-//   total = num1 - num2;
-//   return total;
-// }
-// // ----------------------------------------
-// // multiplication function
-// function multiplication(num1, num2) {
-//   var total = 0;
-//   total = num1 * num2;
-//   return total;
-// }
-// // ----------------------------------------
-// // division function
-// function division(num1, num2) {
-//   total = 0;
-//   total = num1 / num2;
-//   return total;
-// }
-// // ----------------------------------------
-// // clear function
-// function clear() {
-//   // clear screen
-// }
-// // ----------------------------------------
-// // equals function
-// function equals() {
-//   // writes total to screen
-// }
