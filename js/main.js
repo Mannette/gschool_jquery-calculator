@@ -12,9 +12,7 @@
 
 
 $(document).ready(function() {
-  console.log('sanity check');
   var target = event.target;
-  // var secondValArr = [];
   var firstVal = '';
   var secondVal = '';
   var operatorButtons = $('.operator').not('#cancel').not('#calc');
@@ -25,7 +23,6 @@ $(document).ready(function() {
 // --------------------------------------------------
   operatorButtons.on('click', function() {
 
-    console.log($(this).html());
     // pushes operators to array
     // can only select on operator at a time
     operatorArr = [];
@@ -33,8 +30,6 @@ $(document).ready(function() {
     operatorArr.push($(this).text());
 
     $('#screen').append(operatorArr);
-    console.log(operatorArr);
-
 
   });
 
