@@ -25,7 +25,6 @@ $(document).ready(function() {
 // --------------------------------------------------
   operatorButtons.on('click', function() {
 
-    // console.log('operators!');
     console.log($(this).html());
     // pushes operators to array
     // can only select on operator at a time
@@ -42,19 +41,16 @@ $(document).ready(function() {
 //--------------------------------------------------
 // selecting number buttons
   var numButtons = $('span').not('.operator');
-  // var currentVal = [];
 
   numButtons.on('click', function() {
 
     // if no operator is selected
     if (currentVal === 0) {
     firstVal += ($(this).text());
-    console.log(firstVal);
   }
     // once operator is selected
     else {
       secondVal += ($(this).text());
-      console.log(secondVal);
     }
 
     // appends numbers to screen
@@ -64,37 +60,22 @@ $(document).ready(function() {
 
   $('#calc').on('click', function() {
 
-    // var numArr = [];
-    // numArr.push($('#screen').text());
-    // // console.log($('#screen').text().split());
-    // $('#screen').empty();
-    // console.log(numArr);
-
-    // firstVal.join('');
-    // secondVal.join('');
-    // console.log(firstVal.join(''));
-    // console.log(secondVal.join(''));
-
     $('#screen').empty();
 
     switch (operatorArr[0]) {
       case '+':
-      // debugger;
         var sum = parseInt(firstVal) + parseInt(secondVal);
         $('#screen').append(sum);
         break;
       case '-':
-      // debugger;
         var subtract = parseInt(firstVal) - parseInt(secondVal);
         $('#screen').append(subtract);
         break;
       case 'x':
-      // debugger;
         var multiply = parseInt(firstVal) * parseInt(secondVal);
         $('#screen').append(multiply);
         break;
       case '\u00F7':
-      // debugger;
         var divide = parseInt(firstVal) / parseInt(secondVal);
         $('#screen').append(divide);
         break;
@@ -103,7 +84,6 @@ $(document).ready(function() {
     secondVal = '';
 
   });
-  // this works
   $('#cancel').on('click', function() {
 
     // clears screen
